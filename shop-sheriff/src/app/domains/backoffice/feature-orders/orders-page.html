@@ -1,0 +1,80 @@
+<app-page-header
+  title="Orders"
+  subtitle="All buyers. Ship or cancel new orders. New orders arrive live."
+>
+  <app-filter-pills label="Order status" [options]="statusOptions" [(value)]="status" />
+</app-page-header>
+
+<app-problem-alert [problem]="actionProblem()" />
+<app-problem-alert [problem]="loadProblem()" />
+
+@if (orders.hasValue()) {
+  @let result = orders.value();
+  <div class="table-responsive">
+    <table class="table align-middle" [class.opacity-50]="orders.isLoading()">
+      <thead>
+        <tr>
+          <th>Order</th>
+          <th>Buyer</th>
+          <th>Items</th>
+          <th class="text-end">Total</th>
+          <th>Status</th>
+          <th class="text-end">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (order of result.items; track order.id) {
+          <tr>
+            <td>
+              <span class="font-monospace">{{ order.number }}</span>
+              <div class="small text-body-secondary">{{ order.createdAt | date: 'short' }}</div>
+            </td>
+            <td>{{ order.buyer.name }}</td>
+            <td class="small">
+              @for (line of order.lines; track line.productId) {
+                <div>
+                  {{ line.quantity }} × <span class="font-monospace">{{ line.sku }}</span>
+                  <span class="text-body-secondary">{{ line.name }}</span>
+                </div>
+              }
+            </td>
+            <td class="text-end">{{ order.totalCents | price }}</td>
+            <td><app-order-status-badge [status]="order.status" /></td>
+            <td class="text-end text-nowrap">
+              @if (order.status === 'new') {
+                <button
+                  type="button"
+                  class="btn btn-sm btn-success"
+                  [disabled]="busyId() === order.id"
+                  (click)="ship(order)"
+                >
+                  Ship
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-sm btn-outline-danger ms-1"
+                  [disabled]="busyId() === order.id"
+                  (click)="cancel(order)"
+                >
+                  Cancel
+                </button>
+              }
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="6" class="text-center text-body-secondary py-4">No orders here.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  <app-pager
+    [page]="result.page"
+    [pageSize]="result.pageSize"
+    [total]="result.total"
+    (pageChange)="page.set($event)"
+  />
+} @else if (orders.isLoading()) {
+  <p class="text-body-secondary">Loading orders…</p>
+}

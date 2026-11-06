@@ -1,0 +1,6 @@
+{
+  "name": "products-feature",
+  "projectType": "library",
+  "sourceRoot": "libs/products/feature/src",
+  "tags": ["scope:products", "type:feature"]
+}

@@ -1,0 +1,6 @@
+{
+  "name": "cart-data-access",
+  "projectType": "library",
+  "sourceRoot": "libs/cart/data-access/src",
+  "tags": ["scope:cart", "type:data-access"]
+}

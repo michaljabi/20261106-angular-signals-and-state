@@ -1,0 +1,58 @@
+/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
+/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "preserve",
+    // A5: Nx-like library aliases (in Nx: tsconfig.base.json)
+    "paths": {
+      "@shop/products/feature": [
+        "./src/app/a-app-structure/a5-nx/libs/products/feature/src/index.ts"
+      ],
+      "@shop/products/data-access": [
+        "./src/app/a-app-structure/a5-nx/libs/products/data-access/src/index.ts"
+      ],
+      "@shop/products/ui": [
+        "./src/app/a-app-structure/a5-nx/libs/products/ui/src/index.ts"
+      ],
+      "@shop/products/util": [
+        "./src/app/a-app-structure/a5-nx/libs/products/util/src/index.ts"
+      ],
+      "@shop/cart/feature": [
+        "./src/app/a-app-structure/a5-nx/libs/cart/feature/src/index.ts"
+      ],
+      "@shop/cart/data-access": [
+        "./src/app/a-app-structure/a5-nx/libs/cart/data-access/src/index.ts"
+      ],
+      "@shop/cart/ui": [
+        "./src/app/a-app-structure/a5-nx/libs/cart/ui/src/index.ts"
+      ],
+      "@shop/shared/ui": [
+        "./src/app/a-app-structure/a5-nx/libs/shared/ui/src/index.ts"
+      ]
+    }
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true
+  },
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    }
+  ]
+}

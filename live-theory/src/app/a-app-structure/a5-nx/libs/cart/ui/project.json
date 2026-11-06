@@ -1,0 +1,6 @@
+{
+  "name": "cart-ui",
+  "projectType": "library",
+  "sourceRoot": "libs/cart/ui/src",
+  "tags": ["scope:cart", "type:ui"]
+}

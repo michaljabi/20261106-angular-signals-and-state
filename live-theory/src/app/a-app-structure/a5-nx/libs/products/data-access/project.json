@@ -1,0 +1,6 @@
+{
+  "name": "products-data-access",
+  "projectType": "library",
+  "sourceRoot": "libs/products/data-access/src",
+  "tags": ["scope:products", "type:data-access"]
+}

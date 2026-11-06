@@ -1,0 +1,58 @@
+<nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">Shop Sheriff</a>
+
+    <ul class="navbar-nav me-auto flex-row flex-wrap column-gap-3">
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          routerLink="/"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Shop</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/articles" routerLinkActive="active">Articles</a>
+      </li>
+
+      @if (session.hasRole('buyer')) {
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/cart" routerLinkActive="active">
+            Cart
+            @if (cart.count()) {
+              <span class="badge text-bg-primary">{{ cart.count() }}</span>
+            }
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/my-orders" routerLinkActive="active">My orders</a>
+        </li>
+      }
+      @if (session.hasRole('stock-manager', 'admin')) {
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/backoffice/stock" routerLinkActive="active">Stock</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/backoffice/orders" routerLinkActive="active">Orders</a>
+        </li>
+      }
+      @if (session.hasRole('admin')) {
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/backoffice/users" routerLinkActive="active">Users</a>
+        </li>
+      }
+    </ul>
+
+    @if (session.user(); as user) {
+      <span class="navbar-text me-3 small">{{ user.name }} · {{ user.role }}</span>
+      <button type="button" class="btn btn-sm btn-outline-light" (click)="logout()">Log out</button>
+    } @else {
+      <a class="btn btn-sm btn-outline-light" routerLink="/login">Log in</a>
+    }
+  </div>
+</nav>
+
+<main class="container py-4">
+  <router-outlet />
+</main>

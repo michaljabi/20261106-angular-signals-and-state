@@ -1,0 +1,17 @@
+<app-page-header title="Articles" subtitle="Buying guides from our shop." />
+
+<app-problem-alert [problem]="problem()" />
+
+@if (articles.hasValue()) {
+  <div class="row g-3">
+    @for (a of articles.value().items; track a.id) {
+      <div class="col-12 col-md-6 col-lg-4">
+        <app-article-card [article]="a" />
+      </div>
+    } @empty {
+      <p class="text-body-secondary">No articles yet.</p>
+    }
+  </div>
+} @else if (articles.isLoading()) {
+  <p class="text-body-secondary">Loading articles…</p>
+}

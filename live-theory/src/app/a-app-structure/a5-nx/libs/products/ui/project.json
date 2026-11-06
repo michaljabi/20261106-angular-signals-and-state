@@ -1,0 +1,6 @@
+{
+  "name": "products-ui",
+  "projectType": "library",
+  "sourceRoot": "libs/products/ui/src",
+  "tags": ["scope:products", "type:ui"]
+}

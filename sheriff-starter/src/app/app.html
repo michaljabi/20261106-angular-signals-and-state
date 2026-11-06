@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand bg-warning" data-bs-theme="light">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">Starter</a>
+    <ul class="navbar-nav me-auto">
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          routerLink="/"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Catalog</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/cart" routerLinkActive="active">
+          Cart
+          @if (cart.count()) {
+            <span class="badge text-bg-dark">{{ cart.count() }}</span>
+          }
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<main class="container py-4">
+  <div class="alert alert-info" role="note">
+    Project where we are supposed to add the <code>sheriff</code> rules!
+  </div>
+
+  <router-outlet />
+</main>

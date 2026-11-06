@@ -1,0 +1,6 @@
+{
+  "name": "products-util",
+  "projectType": "library",
+  "sourceRoot": "libs/products/util/src",
+  "tags": ["scope:products", "type:util"]
+}

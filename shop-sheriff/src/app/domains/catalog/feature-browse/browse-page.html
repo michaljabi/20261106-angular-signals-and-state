@@ -1,0 +1,68 @@
+<app-page-header title="Shop" subtitle="Keyboards, mice, monitors and more. Stock updates live." />
+
+<div class="row g-2 align-items-center mb-3">
+  <div class="col-12 col-md-7">
+    <label class="visually-hidden" for="search">Search</label>
+    <input
+      #box
+      id="search"
+      type="search"
+      class="form-control"
+      placeholder="Search name or SKU…"
+      autocomplete="off"
+      (input)="onSearch(box.value)"
+    />
+  </div>
+  <div class="col-12 col-md-5">
+    <label class="visually-hidden" for="sort">Sort</label>
+    <select #sortBox id="sort" class="form-select" (change)="onSort(sortBox.value)">
+      @for (s of sorts; track s) {
+        <option [value]="s" [selected]="s === sort()">{{ sortLabels[s] }}</option>
+      }
+    </select>
+  </div>
+</div>
+
+<div class="mb-4">
+  <app-category-filter [categories]="categoryList()" [(selected)]="category" />
+</div>
+
+@if (loadProblem(); as problem) {
+  <app-problem-alert [problem]="problem" />
+  <button type="button" class="btn btn-outline-secondary" (click)="products.reload()">
+    Try again
+  </button>
+} @else if (products.hasValue()) {
+  @let result = products.value();
+  <p class="small text-body-secondary">
+    {{ result.total }} {{ result.total === 1 ? 'product' : 'products' }}
+    @if (q()) {
+      for “{{ q() }}”
+    }
+  </p>
+
+  @if (result.items.length === 0) {
+    <p class="text-body-secondary">Nothing found. Try another search or category.</p>
+  } @else {
+    <div class="row g-3 mb-4">
+      @for (product of result.items; track product.id) {
+        <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+          <app-product-card [product]="product" />
+        </div>
+      }
+    </div>
+  }
+
+  <app-pager
+    [page]="page()"
+    [pageSize]="pageSize"
+    [total]="result.total"
+    (pageChange)="page.set($event)"
+  />
+} @else {
+  <div class="text-center py-5">
+    <div class="spinner-border text-secondary" role="status">
+      <span class="visually-hidden">Loading…</span>
+    </div>
+  </div>
+}

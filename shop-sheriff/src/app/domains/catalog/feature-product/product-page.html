@@ -1,0 +1,58 @@
+<a class="link-secondary small d-inline-block mb-3" routerLink="/">‹ Back to the shop</a>
+
+@if (loadProblem(); as problem) {
+  @if (problem.status === 404) {
+    <div class="card card-body text-center py-5">
+      <h1 class="h4">Product not found</h1>
+      <p class="text-body-secondary mb-0">It may have been removed from the shop.</p>
+    </div>
+  } @else {
+    <app-problem-alert [problem]="problem" />
+    <button type="button" class="btn btn-outline-secondary" (click)="product.reload()">
+      Try again
+    </button>
+  }
+} @else if (product.hasValue()) {
+  @let p = product.value();
+  <div class="row g-4">
+    <div class="col-12 col-lg-8">
+      <div class="small text-body-secondary mb-1">{{ p.category.name }} · {{ p.sku }}</div>
+      <h1 class="h3">{{ p.name }}</h1>
+      <p class="lead">{{ p.description }}</p>
+
+      @if (mentions().length) {
+        <h2 class="h6 mt-4">Mentioned in articles</h2>
+        <ul class="list-unstyled">
+          @for (a of mentions(); track a.slug) {
+            <li class="mb-2">
+              <a [routerLink]="['/articles', a.slug]">{{ a.title }}</a>
+              <div class="small text-body-secondary">{{ a.excerpt }}</div>
+            </li>
+          }
+        </ul>
+      }
+    </div>
+
+    <div class="col-12 col-lg-4">
+      <div class="card">
+        <div class="card-body">
+          <p class="h4 mb-2">{{ p.priceCents | price }}</p>
+          <p><app-stock-badge [stock]="p.stock" /></p>
+          <app-add-to-cart-button
+            [stock]="p.stock"
+            [inCart]="inCart()"
+            [canBuy]="canBuy()"
+            [returnUrl]="returnUrl()"
+            (add)="add()"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+} @else {
+  <div class="text-center py-5">
+    <div class="spinner-border text-secondary" role="status">
+      <span class="visually-hidden">Loading…</span>
+    </div>
+  </div>
+}

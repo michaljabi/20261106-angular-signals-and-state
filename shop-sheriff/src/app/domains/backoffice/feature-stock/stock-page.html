@@ -1,0 +1,112 @@
+<app-page-header
+  title="Stock"
+  subtitle="Keep the numbers right. Changes by other staff arrive live."
+>
+  @if (products.hasValue()) {
+    <span class="small text-body-secondary">{{ products.value().total }} products</span>
+  }
+</app-page-header>
+
+<div class="row g-4">
+  <div class="col-12 col-lg-8">
+    <input
+      #search
+      type="search"
+      class="form-control mb-3"
+      placeholder="Search by name or SKU"
+      aria-label="Search products"
+      [value]="searchText()"
+      (input)="searchText.set(search.value)"
+    />
+
+    <app-problem-alert [problem]="actionProblem()" />
+    <app-problem-alert [problem]="loadProblem()" />
+
+    @if (products.hasValue()) {
+      @let result = products.value();
+      <div class="table-responsive">
+        <table class="table align-middle" [class.opacity-50]="products.isLoading()">
+          <thead>
+            <tr>
+              <th>SKU</th>
+              <th>Product</th>
+              <th class="text-end">Price</th>
+              <th>Stock</th>
+              <th class="text-end">Change</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (product of result.items; track product.id) {
+              <tr>
+                <td class="font-monospace small">{{ product.sku }}</td>
+                <td>
+                  {{ product.name }}
+                  <div class="small text-body-secondary">{{ product.category.name }}</div>
+                </td>
+                <td class="text-end">{{ product.priceCents | price }}</td>
+                <td><app-stock-badge [stock]="product.stock" /></td>
+                <td class="text-end text-nowrap">
+                  <div class="btn-group btn-group-sm">
+                    <button
+                      type="button"
+                      class="btn btn-outline-secondary"
+                      [attr.aria-label]="'Remove one ' + product.name"
+                      [disabled]="busyId() === product.id || product.stock === 0"
+                      (click)="adjust(product, -1)"
+                    >
+                      −1
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-outline-secondary"
+                      [attr.aria-label]="'Add one ' + product.name"
+                      [disabled]="busyId() === product.id"
+                      (click)="adjust(product, 1)"
+                    >
+                      +1
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-outline-primary"
+                      [attr.aria-label]="'Add ten ' + product.name"
+                      [disabled]="busyId() === product.id"
+                      (click)="adjust(product, 10)"
+                    >
+                      +10
+                    </button>
+                  </div>
+                  @if (isAdmin()) {
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-outline-danger ms-2"
+                      [disabled]="busyId() === product.id"
+                      (click)="remove(product)"
+                    >
+                      Delete
+                    </button>
+                  }
+                </td>
+              </tr>
+            } @empty {
+              <tr>
+                <td colspan="5" class="text-center text-body-secondary py-4">No products found.</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      <app-pager
+        [page]="result.page"
+        [pageSize]="result.pageSize"
+        [total]="result.total"
+        (pageChange)="page.set($event)"
+      />
+    } @else if (products.isLoading()) {
+      <p class="text-body-secondary">Loading products…</p>
+    }
+  </div>
+
+  <div class="col-12 col-lg-4">
+    <app-new-product-form (created)="onCreated()" />
+  </div>
+</div>

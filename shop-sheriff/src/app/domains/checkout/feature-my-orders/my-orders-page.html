@@ -1,0 +1,95 @@
+<app-page-header title="My orders" subtitle="Status updates arrive live.">
+  <button
+    type="button"
+    class="btn btn-sm btn-outline-secondary"
+    [disabled]="orders.isLoading()"
+    (click)="orders.reload()"
+  >
+    Refresh
+  </button>
+</app-page-header>
+
+@if (placed(); as number) {
+  <div class="alert alert-success py-2" role="status">
+    Thank you! Order <strong>{{ number }}</strong> has been placed.
+  </div>
+}
+
+<app-problem-alert [problem]="problem()" />
+
+@if (loadProblem(); as p) {
+  <app-problem-alert [problem]="p" />
+} @else if (orders.hasValue()) {
+  @let result = orders.value();
+  @if (result.items.length === 0) {
+    <p class="text-body-secondary">No orders yet.</p>
+  } @else {
+    <div class="list-group mb-3" [class.opacity-50]="orders.isLoading()">
+      @for (order of result.items; track order.id) {
+        <div class="list-group-item">
+          <div class="d-flex flex-wrap align-items-center gap-3">
+            <button
+              type="button"
+              class="btn btn-link p-0 fw-semibold"
+              [attr.aria-expanded]="expandedId() === order.id"
+              (click)="toggle(order.id)"
+            >
+              {{ expandedId() === order.id ? '▾' : '▸' }} {{ order.number }}
+            </button>
+            <span class="small text-body-secondary">{{ order.createdAt | date: 'medium' }}</span>
+            <app-order-status-badge [status]="order.status" />
+            <span class="ms-auto fw-semibold">{{ order.totalCents | price }}</span>
+            @if (order.status === 'new') {
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-danger"
+                [disabled]="cancellingId() === order.id"
+                (click)="cancel(order)"
+              >
+                Cancel
+              </button>
+            }
+          </div>
+
+          @if (expandedId() === order.id) {
+            <table class="table table-sm mt-2 mb-0">
+              <thead>
+                <tr>
+                  <th scope="col">Product</th>
+                  <th scope="col" class="text-end">Qty</th>
+                  <th scope="col" class="text-end">Unit price</th>
+                  <th scope="col" class="text-end">Line total</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (line of order.lines; track line.productId) {
+                  <tr>
+                    <td>
+                      {{ line.name }} <span class="small text-body-secondary">{{ line.sku }}</span>
+                    </td>
+                    <td class="text-end">{{ line.quantity }}</td>
+                    <!-- snapshot: the price when the order was placed, not today's price -->
+                    <td class="text-end">{{ line.unitPriceCents | price }}</td>
+                    <td class="text-end">{{ line.lineTotalCents | price }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          }
+        </div>
+      }
+    </div>
+    <app-pager
+      [page]="page()"
+      [pageSize]="pageSize"
+      [total]="result.total"
+      (pageChange)="page.set($event)"
+    />
+  }
+} @else {
+  <div class="text-center py-5">
+    <div class="spinner-border text-secondary" role="status">
+      <span class="visually-hidden">Loading…</span>
+    </div>
+  </div>
+}

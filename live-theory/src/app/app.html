@@ -1,0 +1,33 @@
+<header class="navbar bg-primary sticky-top" data-bs-theme="dark">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">
+      Angular Live Theory <small class="opacity-75">Signals &amp; State</small>
+    </a>
+    <button
+      class="navbar-toggler d-md-none"
+      type="button"
+      aria-controls="app-menu"
+      aria-label="Pokaż / ukryj menu"
+      [attr.aria-expanded]="menuOpen()"
+      (click)="toggleMenu()"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <!-- Below md: hidden unless menuOpen(). From md up: always visible. -->
+    <aside
+      id="app-menu"
+      class="col-md-4 col-lg-3 border-end pb-3 d-md-block"
+      [class.d-none]="!menuOpen()"
+    >
+      <app-menu [sections]="sections" (navigated)="closeMenu()" />
+    </aside>
+    <main class="col-md-8 col-lg-9 py-4 ps-md-4">
+      <router-outlet />
+    </main>
+  </div>
+</div>

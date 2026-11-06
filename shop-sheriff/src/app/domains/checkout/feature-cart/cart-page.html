@@ -1,0 +1,108 @@
+<app-page-header title="Cart" subtitle="Check the quantities and place your order." />
+
+@if (cart.isEmpty()) {
+  <div class="card card-body text-center py-5">
+    <p class="text-body-secondary mb-3">Your cart is empty.</p>
+    <div><a class="btn btn-primary" routerLink="/">Browse products</a></div>
+  </div>
+} @else {
+  <div class="row g-4">
+    <div class="col-12 col-lg-8">
+      <div class="table-responsive">
+        <table class="table align-middle">
+          <thead>
+            <tr>
+              <th scope="col">Product</th>
+              <th scope="col" class="text-end">Price</th>
+              <th scope="col">Quantity</th>
+              <th scope="col" class="text-end">Total</th>
+              <th scope="col"><span class="visually-hidden">Actions</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (line of cart.lines(); track line.productId) {
+              <tr [class.table-warning]="line.quantity > line.stock">
+                <td>
+                  <a [routerLink]="['/products', line.slug]">{{ line.name }}</a>
+                  <div class="small text-body-secondary">{{ line.sku }}</div>
+                  @if (line.quantity > line.stock) {
+                    <div class="small text-danger">
+                      {{ line.stock === 0 ? 'Out of stock' : 'Only ' + line.stock + ' left' }}
+                    </div>
+                  }
+                </td>
+                <td class="text-end">{{ line.priceCents | price }}</td>
+                <td>
+                  <app-quantity-stepper
+                    [quantity]="line.quantity"
+                    [max]="line.stock"
+                    [label]="line.name"
+                    (quantityChange)="setQuantity(line.productId, $event)"
+                  />
+                </td>
+                <td class="text-end">{{ line.priceCents * line.quantity | price }}</td>
+                <td class="text-end">
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-link text-danger"
+                    [attr.aria-label]="'Remove ' + line.name"
+                    (click)="remove(line.productId)"
+                  >
+                    ✕
+                  </button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-4">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="h5 card-title">Summary</h2>
+          <p class="d-flex justify-content-between mb-1">
+            <span>Items</span><span>{{ cart.count() }}</span>
+          </p>
+          <p class="d-flex justify-content-between fw-semibold">
+            <span>Total</span><span>{{ cart.totalCents() | price }}</span>
+          </p>
+
+          @if (conflict(); as c) {
+            <!-- 409: the server told us exactly which product is short -->
+            <div class="alert alert-warning py-2" role="alert">
+              <strong>Not enough stock for {{ c.sku }}.</strong>
+              You asked for {{ c.requested }}, only {{ c.available }} available.
+              <div class="mt-2">
+                <button type="button" class="btn btn-sm btn-warning" (click)="fitToStock(c)">
+                  {{ c.available === 0 ? 'Remove from cart' : 'Set to ' + c.available }}
+                </button>
+              </div>
+            </div>
+          } @else {
+            <app-problem-alert [problem]="problem()" />
+            @if (shortLines().length) {
+              <p class="small text-warning-emphasis">
+                Some items have less stock than in your cart. You can still try: the server checks
+                the real stock.
+              </p>
+            }
+          }
+
+          <button
+            type="button"
+            class="btn btn-primary w-100"
+            [disabled]="placing()"
+            (click)="placeOrder()"
+          >
+            @if (placing()) {
+              <span class="spinner-border spinner-border-sm me-1" aria-hidden="true"></span>
+            }
+            Place order
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+}

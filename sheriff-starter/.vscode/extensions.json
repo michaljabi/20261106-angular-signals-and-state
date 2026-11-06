@@ -1,0 +1,30 @@
+{
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=827846
+  "recommendations": [
+    // Angular:
+    "angular.ng-template",
+    "cyrilletuzi.angular-schematics",
+    // jakość kodu (ESLint + Sheriff, Prettier):
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "editorconfig.editorconfig",
+    "usernamehw.errorlens",
+    "yoavbls.pretty-ts-errors",
+    // testowanie:
+    "vitest.explorer",
+    // wygląd UI:
+    "johnpapa.vscode-peacock",
+    "pkief.material-icon-theme",
+    // pomoc do naszego projektu:
+    "hossaini.bootstrap-intellisense",
+    "humao.rest-client",
+    "bierner.markdown-mermaid",
+    "antfu.slidev"
+  ],
+  "unwantedRecommendations": [
+    "wallabyjs.wallaby-vscode",
+    "infinity1207.angular2-switcher",
+    "formulahendry.auto-rename-tag",
+    "Zignd.html-css-class-completion"
+  ]
+}

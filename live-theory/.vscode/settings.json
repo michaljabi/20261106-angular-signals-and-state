@@ -1,0 +1,4 @@
+{
+  // Built-in replacement for "auto-rename-tag": edit an opening tag, the closing tag follows.
+  "editor.linkedEditing": true
+}

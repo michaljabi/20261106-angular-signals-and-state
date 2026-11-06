@@ -1,0 +1,76 @@
+<app-page-header
+  title="Users"
+  subtitle="Change roles or remove accounts. You cannot change yourself."
+>
+  <app-filter-pills label="Role" [options]="roleOptions" [(value)]="role" />
+</app-page-header>
+
+<app-problem-alert [problem]="actionProblem()" />
+<app-problem-alert [problem]="loadProblem()" />
+
+@if (users.hasValue()) {
+  @let result = users.value();
+  <div class="table-responsive">
+    <table class="table align-middle" [class.opacity-50]="users.isLoading()">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th style="width: 14rem">Role</th>
+          <th class="text-end">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (user of result.items; track user.id) {
+          @let me = isMe(user);
+          <tr>
+            <td>
+              {{ user.name }}
+              @if (me) {
+                <span class="badge text-bg-secondary ms-1">you</span>
+              }
+            </td>
+            <td class="text-body-secondary">{{ user.email }}</td>
+            <td>
+              <select
+                #roleSelect
+                class="form-select form-select-sm"
+                [attr.aria-label]="'Role of ' + user.name"
+                [disabled]="me || busyId() === user.id"
+                (change)="changeRole(user, roleSelect)"
+              >
+                @for (role of roles; track role) {
+                  <option [value]="role" [selected]="role === user.role">{{ role }}</option>
+                }
+              </select>
+            </td>
+            <td class="text-end">
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-danger"
+                [disabled]="me || busyId() === user.id"
+                (click)="remove(user)"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="4" class="text-center text-body-secondary py-4">
+              No users with this role.
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  <app-pager
+    [page]="result.page"
+    [pageSize]="result.pageSize"
+    [total]="result.total"
+    (pageChange)="page.set($event)"
+  />
+} @else if (users.isLoading()) {
+  <p class="text-body-secondary">Loading users…</p>
+}

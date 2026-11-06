@@ -1,0 +1,657 @@
+{
+  "users": [
+    {
+      "email": "anna@shop.test",
+      "name": "Anna Admin",
+      "role": "admin",
+      "password": "Shop!2026",
+      "deletedAt": null
+    },
+    {
+      "email": "tomek@shop.test",
+      "name": "Tomek Stock",
+      "role": "stock-manager",
+      "password": "Shop!2026",
+      "deletedAt": null
+    },
+    {
+      "email": "jan@shop.test",
+      "name": "Jan Kowalski",
+      "role": "buyer",
+      "password": "Shop!2026",
+      "deletedAt": null
+    },
+    {
+      "email": "ola@shop.test",
+      "name": "Ola Nowak",
+      "role": "buyer",
+      "password": "Shop!2026",
+      "deletedAt": null
+    },
+    {
+      "email": "kasia@shop.test",
+      "name": "Kasia Wiśniewska",
+      "role": "buyer",
+      "password": "Shop!2026",
+      "deletedAt": null
+    }
+  ],
+
+  "categories": [
+    { "slug": "keyboards", "name": "Keyboards" },
+    { "slug": "mice", "name": "Mice" },
+    { "slug": "monitors", "name": "Monitors" },
+    { "slug": "audio", "name": "Audio" },
+    { "slug": "cables", "name": "Cables" }
+  ],
+
+  "products": [
+    {
+      "sku": "KB-0001",
+      "slug": "typeforge-tkl-mechanical-keyboard",
+      "name": "Typeforge TKL Mechanical Keyboard",
+      "description": "Tenkeyless layout, hot-swap switches, aluminium case.",
+      "priceCents": 8699,
+      "stock": 12,
+      "category": "keyboards",
+      "deletedAt": null
+    },
+    {
+      "sku": "KB-0002",
+      "slug": "typeforge-75-wireless-keyboard",
+      "name": "Typeforge 75% Wireless Keyboard",
+      "description": "Compact 75% layout, Bluetooth + 2.4 GHz, 3 devices.",
+      "priceCents": 11199,
+      "stock": 7,
+      "category": "keyboards",
+      "deletedAt": null
+    },
+    {
+      "sku": "KB-0003",
+      "slug": "typeforge-full-size-office-keyboard",
+      "name": "Typeforge Full-Size Office Keyboard",
+      "description": "Quiet scissor keys with a full numpad.",
+      "priceCents": 3999,
+      "stock": 25,
+      "category": "keyboards",
+      "deletedAt": null
+    },
+    {
+      "sku": "KB-0004",
+      "slug": "typeforge-low-profile-keyboard",
+      "name": "Typeforge Low-Profile Keyboard",
+      "description": "Slim mechanical keyboard with low-profile switches.",
+      "priceCents": 6999,
+      "stock": 3,
+      "category": "keyboards",
+      "deletedAt": null
+    },
+    {
+      "sku": "KB-0005",
+      "slug": "typeforge-ergonomic-split-keyboard",
+      "name": "Typeforge Ergonomic Split Keyboard",
+      "description": "Split, tented design for a natural wrist position.",
+      "priceCents": 17499,
+      "stock": 2,
+      "category": "keyboards",
+      "deletedAt": null
+    },
+    {
+      "sku": "KB-0006",
+      "slug": "typeforge-60-compact-keyboard",
+      "name": "Typeforge 60% Compact Keyboard",
+      "description": "Minimal 60% board, perfect for small desks.",
+      "priceCents": 7499,
+      "stock": 0,
+      "category": "keyboards",
+      "deletedAt": null
+    },
+    {
+      "sku": "KB-0007",
+      "slug": "typeforge-wireless-numpad",
+      "name": "Typeforge Wireless Numpad",
+      "description": "Stand-alone numpad for compact keyboards.",
+      "priceCents": 2499,
+      "stock": 18,
+      "category": "keyboards",
+      "deletedAt": null
+    },
+    {
+      "sku": "KB-0008",
+      "slug": "typeforge-pbt-keycap-set",
+      "name": "Typeforge PBT Keycap Set",
+      "description": "Double-shot PBT keycaps, 139 keys.",
+      "priceCents": 3699,
+      "stock": 9,
+      "category": "keyboards",
+      "deletedAt": null
+    },
+
+    {
+      "sku": "MS-0001",
+      "slug": "glidex-pro-wireless-mouse",
+      "name": "Glidex Pro Wireless Mouse",
+      "description": "Ergonomic wireless mouse with silent clicks and USB-C charging.",
+      "priceCents": 6199,
+      "stock": 15,
+      "category": "mice",
+      "deletedAt": null
+    },
+    {
+      "sku": "MS-0002",
+      "slug": "glidex-lightweight-gaming-mouse",
+      "name": "Glidex Lightweight Gaming Mouse",
+      "description": "58 g, 26k DPI sensor, PTFE feet.",
+      "priceCents": 4999,
+      "stock": 4,
+      "category": "mice",
+      "deletedAt": null
+    },
+    {
+      "sku": "MS-0003",
+      "slug": "glidex-vertical-ergonomic-mouse",
+      "name": "Glidex Vertical Ergonomic Mouse",
+      "description": "Vertical grip that reduces forearm strain.",
+      "priceCents": 4499,
+      "stock": 6,
+      "category": "mice",
+      "deletedAt": null
+    },
+    {
+      "sku": "MS-0004",
+      "slug": "glidex-travel-mouse",
+      "name": "Glidex Travel Mouse",
+      "description": "Small, flat and Bluetooth-only.",
+      "priceCents": 2199,
+      "stock": 30,
+      "category": "mice",
+      "deletedAt": null
+    },
+    {
+      "sku": "MS-0005",
+      "slug": "glidex-trackball",
+      "name": "Glidex Trackball",
+      "description": "Thumb-operated trackball, wireless.",
+      "priceCents": 6999,
+      "stock": 1,
+      "category": "mice",
+      "deletedAt": null
+    },
+    {
+      "sku": "MS-0006",
+      "slug": "glidex-silent-office-mouse",
+      "name": "Glidex Silent Office Mouse",
+      "description": "Wired mouse with silent buttons.",
+      "priceCents": 1699,
+      "stock": 0,
+      "category": "mice",
+      "deletedAt": null
+    },
+    {
+      "sku": "MS-0007",
+      "slug": "glidex-xl-desk-mat",
+      "name": "Glidex XL Desk Mat",
+      "description": "90 × 40 cm cloth desk mat with stitched edges.",
+      "priceCents": 1999,
+      "stock": 22,
+      "category": "mice",
+      "deletedAt": null
+    },
+    {
+      "sku": "MS-0008",
+      "slug": "glidex-wireless-charging-pad",
+      "name": "Glidex Wireless Charging Pad",
+      "description": "Mouse pad that charges compatible mice while you work.",
+      "priceCents": 3199,
+      "stock": 8,
+      "category": "mice",
+      "deletedAt": null
+    },
+
+    {
+      "sku": "MN-0001",
+      "slug": "pixelia-24-fhd-ips-monitor",
+      "name": "Pixelia 24\" FHD IPS Monitor",
+      "description": "1920 × 1080, 100 Hz, thin bezels.",
+      "priceCents": 16199,
+      "stock": 10,
+      "category": "monitors",
+      "deletedAt": null
+    },
+    {
+      "sku": "MN-0002",
+      "slug": "pixelia-27-qhd-ips-monitor",
+      "name": "Pixelia 27\" QHD IPS Monitor",
+      "description": "2560 × 1440, 144 Hz, height-adjustable stand.",
+      "priceCents": 32499,
+      "stock": 5,
+      "category": "monitors",
+      "deletedAt": null
+    },
+    {
+      "sku": "MN-0003",
+      "slug": "pixelia-27-4k-usb-c-monitor",
+      "name": "Pixelia 27\" 4K USB-C Monitor",
+      "description": "3840 × 2160, USB-C with 90 W charging.",
+      "priceCents": 54999,
+      "stock": 3,
+      "category": "monitors",
+      "deletedAt": null
+    },
+    {
+      "sku": "MN-0004",
+      "slug": "pixelia-34-ultrawide-monitor",
+      "name": "Pixelia 34\" Ultrawide Monitor",
+      "description": "3440 × 1440 curved panel, 165 Hz.",
+      "priceCents": 69999,
+      "stock": 2,
+      "category": "monitors",
+      "deletedAt": null
+    },
+    {
+      "sku": "MN-0005",
+      "slug": "pixelia-32-4k-monitor",
+      "name": "Pixelia 32\" 4K Monitor",
+      "description": "Large 4K panel for photo and video work.",
+      "priceCents": 62499,
+      "stock": 0,
+      "category": "monitors",
+      "deletedAt": null
+    },
+    {
+      "sku": "MN-0006",
+      "slug": "pixelia-15-portable-monitor",
+      "name": "Pixelia 15.6\" Portable Monitor",
+      "description": "USB-C powered second screen for laptops.",
+      "priceCents": 22499,
+      "stock": 6,
+      "category": "monitors",
+      "deletedAt": null
+    },
+    {
+      "sku": "MN-0007",
+      "slug": "pixelia-dual-monitor-arm",
+      "name": "Pixelia Dual Monitor Arm",
+      "description": "Gas-spring arm for two screens up to 32\".",
+      "priceCents": 8699,
+      "stock": 11,
+      "category": "monitors",
+      "deletedAt": null
+    },
+    {
+      "sku": "MN-0008",
+      "slug": "pixelia-monitor-light-bar",
+      "name": "Pixelia Monitor Light Bar",
+      "description": "Asymmetric desk light that sits on top of the monitor.",
+      "priceCents": 4999,
+      "stock": 14,
+      "category": "monitors",
+      "deletedAt": null
+    },
+
+    {
+      "sku": "AU-0001",
+      "slug": "sonora-wireless-anc-headphones",
+      "name": "Sonora Wireless ANC Headphones",
+      "description": "Over-ear, active noise cancelling, 40 h battery.",
+      "priceCents": 19999,
+      "stock": 9,
+      "category": "audio",
+      "deletedAt": null
+    },
+    {
+      "sku": "AU-0002",
+      "slug": "sonora-usb-podcast-microphone",
+      "name": "Sonora USB Podcast Microphone",
+      "description": "Cardioid USB-C microphone with gain knob and mute.",
+      "priceCents": 12499,
+      "stock": 4,
+      "category": "audio",
+      "deletedAt": null
+    },
+    {
+      "sku": "AU-0003",
+      "slug": "sonora-gaming-headset",
+      "name": "Sonora Gaming Headset",
+      "description": "Closed-back headset with detachable boom mic.",
+      "priceCents": 8699,
+      "stock": 12,
+      "category": "audio",
+      "deletedAt": null
+    },
+    {
+      "sku": "AU-0004",
+      "slug": "sonora-true-wireless-earbuds",
+      "name": "Sonora True Wireless Earbuds",
+      "description": "Compact earbuds with wireless charging case.",
+      "priceCents": 9999,
+      "stock": 0,
+      "category": "audio",
+      "deletedAt": null
+    },
+    {
+      "sku": "AU-0005",
+      "slug": "sonora-desktop-speakers",
+      "name": "Sonora Desktop Speakers 2.0",
+      "description": "Bookshelf speakers with Bluetooth and optical input.",
+      "priceCents": 7499,
+      "stock": 7,
+      "category": "audio",
+      "deletedAt": null
+    },
+    {
+      "sku": "AU-0006",
+      "slug": "sonora-usb-dac-amp",
+      "name": "Sonora USB DAC/Amp",
+      "description": "Desktop DAC and headphone amplifier.",
+      "priceCents": 11199,
+      "stock": 3,
+      "category": "audio",
+      "deletedAt": null
+    },
+    {
+      "sku": "AU-0007",
+      "slug": "sonora-1080p-webcam",
+      "name": "Sonora 1080p Webcam",
+      "description": "Full HD webcam with privacy shutter and stereo mics.",
+      "priceCents": 6999,
+      "stock": 16,
+      "category": "audio",
+      "deletedAt": null
+    },
+    {
+      "sku": "AU-0008",
+      "slug": "sonora-microphone-boom-arm",
+      "name": "Sonora Microphone Boom Arm",
+      "description": "Low-profile boom arm with internal cable routing.",
+      "priceCents": 3999,
+      "stock": 10,
+      "category": "audio",
+      "deletedAt": null
+    },
+
+    {
+      "sku": "CB-0001",
+      "slug": "linkwell-usb-c-cable-1m",
+      "name": "Linkwell USB-C to USB-C Cable 1 m",
+      "description": "60 W, USB 2.0 data.",
+      "priceCents": 999,
+      "stock": 120,
+      "category": "cables",
+      "deletedAt": null
+    },
+    {
+      "sku": "CB-0002",
+      "slug": "linkwell-usb-c-cable-2m-240w",
+      "name": "Linkwell USB-C to USB-C Cable 2 m 240 W",
+      "description": "240 W charging, braided.",
+      "priceCents": 1499,
+      "stock": 60,
+      "category": "cables",
+      "deletedAt": null
+    },
+    {
+      "sku": "CB-0003",
+      "slug": "linkwell-hdmi-2-1-cable-2m",
+      "name": "Linkwell HDMI 2.1 Cable 2 m",
+      "description": "48 Gbps, 4K 120 Hz / 8K 60 Hz.",
+      "priceCents": 1699,
+      "stock": 40,
+      "category": "cables",
+      "deletedAt": null
+    },
+    {
+      "sku": "CB-0004",
+      "slug": "linkwell-displayport-1-4-cable-2m",
+      "name": "Linkwell DisplayPort 1.4 Cable 2 m",
+      "description": "Supports 4K 144 Hz.",
+      "priceCents": 1999,
+      "stock": 3,
+      "category": "cables",
+      "deletedAt": null
+    },
+    {
+      "sku": "CB-0005",
+      "slug": "linkwell-usb-c-hub-7-in-1",
+      "name": "Linkwell USB-C Hub 7-in-1",
+      "description": "HDMI, 3 × USB-A, SD, microSD, 100 W pass-through.",
+      "priceCents": 4699,
+      "stock": 14,
+      "category": "cables",
+      "deletedAt": null
+    },
+    {
+      "sku": "CB-0006",
+      "slug": "linkwell-thunderbolt-4-cable",
+      "name": "Linkwell Thunderbolt 4 Cable 0.8 m",
+      "description": "40 Gbps, 100 W, certified.",
+      "priceCents": 3699,
+      "stock": 0,
+      "category": "cables",
+      "deletedAt": null
+    },
+    {
+      "sku": "CB-0007",
+      "slug": "linkwell-cable-management-kit",
+      "name": "Linkwell Cable Management Kit",
+      "description": "Under-desk tray, clips and velcro ties.",
+      "priceCents": 1199,
+      "stock": 35,
+      "category": "cables",
+      "deletedAt": null
+    },
+    {
+      "sku": "CB-0008",
+      "slug": "linkwell-usb-a-to-usb-c-cable-1m",
+      "name": "Linkwell USB-A to USB-C Cable 1 m",
+      "description": "Discontinued. Kept for order history.",
+      "priceCents": 699,
+      "stock": 0,
+      "category": "cables",
+      "deletedAt": "2026-10-15T08:00:00.000Z"
+    }
+  ],
+
+  "orders": [
+    {
+      "number": "ORD-0001",
+      "buyer": "jan@shop.test",
+      "status": "shipped",
+      "createdAt": "2026-10-01T09:12:00.000Z"
+    },
+    {
+      "number": "ORD-0002",
+      "buyer": "ola@shop.test",
+      "status": "shipped",
+      "createdAt": "2026-10-02T14:30:00.000Z"
+    },
+    {
+      "number": "ORD-0003",
+      "buyer": "kasia@shop.test",
+      "status": "shipped",
+      "createdAt": "2026-10-04T10:05:00.000Z"
+    },
+    {
+      "number": "ORD-0004",
+      "buyer": "jan@shop.test",
+      "status": "cancelled",
+      "createdAt": "2026-10-05T18:40:00.000Z"
+    },
+    {
+      "number": "ORD-0005",
+      "buyer": "ola@shop.test",
+      "status": "shipped",
+      "createdAt": "2026-10-07T08:55:00.000Z"
+    },
+    {
+      "number": "ORD-0006",
+      "buyer": "kasia@shop.test",
+      "status": "shipped",
+      "createdAt": "2026-10-09T12:20:00.000Z"
+    },
+    {
+      "number": "ORD-0007",
+      "buyer": "jan@shop.test",
+      "status": "cancelled",
+      "createdAt": "2026-10-11T16:00:00.000Z"
+    },
+    {
+      "number": "ORD-0008",
+      "buyer": "ola@shop.test",
+      "status": "shipped",
+      "createdAt": "2026-10-14T09:45:00.000Z"
+    },
+    {
+      "number": "ORD-0009",
+      "buyer": "kasia@shop.test",
+      "status": "cancelled",
+      "createdAt": "2026-10-16T13:10:00.000Z"
+    },
+    {
+      "number": "ORD-0010",
+      "buyer": "jan@shop.test",
+      "status": "new",
+      "createdAt": "2026-10-20T07:30:00.000Z"
+    },
+    {
+      "number": "ORD-0011",
+      "buyer": "ola@shop.test",
+      "status": "cancelled",
+      "createdAt": "2026-10-22T19:25:00.000Z"
+    },
+    {
+      "number": "ORD-0012",
+      "buyer": "kasia@shop.test",
+      "status": "new",
+      "createdAt": "2026-10-25T11:00:00.000Z"
+    },
+    {
+      "number": "ORD-0013",
+      "buyer": "jan@shop.test",
+      "status": "new",
+      "createdAt": "2026-10-27T15:15:00.000Z"
+    },
+    {
+      "number": "ORD-0014",
+      "buyer": "ola@shop.test",
+      "status": "new",
+      "createdAt": "2026-10-29T10:40:00.000Z"
+    },
+    {
+      "number": "ORD-0015",
+      "buyer": "kasia@shop.test",
+      "status": "new",
+      "createdAt": "2026-10-30T17:05:00.000Z"
+    }
+  ],
+
+  "orderLines": [
+    { "order": "ORD-0001", "product": "KB-0001", "quantity": 1, "unitPriceCents": 8699 },
+    { "order": "ORD-0001", "product": "MS-0001", "quantity": 1, "unitPriceCents": 6199 },
+    { "order": "ORD-0002", "product": "CB-0008", "quantity": 3, "unitPriceCents": 699 },
+    { "order": "ORD-0002", "product": "CB-0001", "quantity": 2, "unitPriceCents": 999 },
+    { "order": "ORD-0003", "product": "MN-0002", "quantity": 1, "unitPriceCents": 34999 },
+    { "order": "ORD-0003", "product": "MN-0007", "quantity": 1, "unitPriceCents": 8699 },
+    { "order": "ORD-0004", "product": "AU-0004", "quantity": 2, "unitPriceCents": 9999 },
+    { "order": "ORD-0005", "product": "AU-0001", "quantity": 1, "unitPriceCents": 21199 },
+    { "order": "ORD-0005", "product": "AU-0008", "quantity": 1, "unitPriceCents": 3999 },
+    { "order": "ORD-0006", "product": "KB-0003", "quantity": 2, "unitPriceCents": 3999 },
+    { "order": "ORD-0006", "product": "MS-0006", "quantity": 2, "unitPriceCents": 1699 },
+    { "order": "ORD-0007", "product": "MN-0005", "quantity": 1, "unitPriceCents": 62499 },
+    { "order": "ORD-0008", "product": "CB-0005", "quantity": 1, "unitPriceCents": 4699 },
+    { "order": "ORD-0008", "product": "CB-0003", "quantity": 1, "unitPriceCents": 1699 },
+    { "order": "ORD-0009", "product": "MS-0005", "quantity": 1, "unitPriceCents": 6999 },
+    { "order": "ORD-0010", "product": "KB-0002", "quantity": 1, "unitPriceCents": 11199 },
+    { "order": "ORD-0010", "product": "KB-0008", "quantity": 1, "unitPriceCents": 3699 },
+    { "order": "ORD-0011", "product": "AU-0002", "quantity": 1, "unitPriceCents": 12499 },
+    { "order": "ORD-0012", "product": "MN-0001", "quantity": 2, "unitPriceCents": 16199 },
+    { "order": "ORD-0012", "product": "CB-0003", "quantity": 2, "unitPriceCents": 1699 },
+    { "order": "ORD-0013", "product": "AU-0003", "quantity": 1, "unitPriceCents": 8699 },
+    { "order": "ORD-0014", "product": "MS-0002", "quantity": 1, "unitPriceCents": 4999 },
+    { "order": "ORD-0014", "product": "MS-0007", "quantity": 1, "unitPriceCents": 1999 },
+    { "order": "ORD-0015", "product": "CB-0002", "quantity": 3, "unitPriceCents": 1499 },
+    { "order": "ORD-0015", "product": "CB-0007", "quantity": 1, "unitPriceCents": 1199 }
+  ],
+
+  "articles": [
+    {
+      "slug": "best-mechanical-keyboard-for-programmers",
+      "title": "The Best Mechanical Keyboard for Programmers",
+      "excerpt": "Layout, switches and connectivity: what really matters when you type code all day.",
+      "body": "## Layout first\n\nMost developers do not need a numpad. A tenkeyless or 75% board keeps the mouse closer and your shoulders relaxed.\n\n## Switches\n\nLinear switches are quiet and smooth; tactile switches give feedback without the noise of clicky ones.\n\n## Our picks\n\nThe Typeforge TKL is the safe choice, the 75% Wireless is the best for multi-device setups.",
+      "createdAt": "2026-09-20T09:00:00.000Z",
+      "publishedAt": "2026-09-22T08:00:00.000Z"
+    },
+    {
+      "slug": "ergonomic-desk-setup-guide",
+      "title": "Ergonomic Desk Setup Guide",
+      "excerpt": "Five changes that make an eight-hour day at the desk hurt less.",
+      "body": "## 1. Screen at eye level\n\nUse a monitor arm so the top edge of the screen is at eye height.\n\n## 2. Neutral wrists\n\nA split keyboard and a vertical mouse keep your wrists straight.\n\n## 3. Take breaks\n\nNo gear replaces standing up every hour.",
+      "createdAt": "2026-09-25T10:00:00.000Z",
+      "publishedAt": "2026-09-26T08:00:00.000Z"
+    },
+    {
+      "slug": "choosing-a-monitor-for-coding",
+      "title": "Choosing a Monitor for Coding",
+      "excerpt": "Resolution, size and pixel density explained for people who read text all day.",
+      "body": "## Pixel density matters\n\n27\" QHD is the sweet spot for price; 27\" 4K gives the sharpest text.\n\n## Ultrawide?\n\nGreat for side-by-side editors, but check that your laptop can drive 3440 × 1440.\n\n## USB-C\n\nOne cable for video, data and charging keeps the desk clean.",
+      "createdAt": "2026-09-28T12:00:00.000Z",
+      "publishedAt": "2026-09-30T08:00:00.000Z"
+    },
+    {
+      "slug": "usb-c-cables-explained",
+      "title": "USB-C Cables Explained",
+      "excerpt": "Why two cables that look the same can charge and transfer data very differently.",
+      "body": "## Same plug, different cable\n\nUSB-C is only the connector. Power (60 W vs 240 W) and data speed (USB 2.0 vs 40 Gbps) depend on the cable.\n\n## Rule of thumb\n\nCharging only: a 240 W cable. Docks and fast drives: Thunderbolt 4.",
+      "createdAt": "2026-10-03T09:30:00.000Z",
+      "publishedAt": "2026-10-04T08:00:00.000Z"
+    },
+    {
+      "slug": "home-office-audio-basics",
+      "title": "Home Office Audio Basics",
+      "excerpt": "Sound good in meetings and focus better between them.",
+      "body": "## Your voice\n\nA USB microphone on a boom arm beats any laptop mic.\n\n## Your focus\n\nNoise-cancelling headphones block the neighbour's drill and the open-space chatter.",
+      "createdAt": "2026-10-06T11:00:00.000Z",
+      "publishedAt": "2026-10-07T08:00:00.000Z"
+    },
+    {
+      "slug": "remote-meeting-kit",
+      "title": "The Remote Meeting Kit",
+      "excerpt": "Camera, light and headset: look and sound professional for under $250.",
+      "body": "## Light beats camera\n\nA monitor light bar does more for your image than an expensive webcam.\n\n## Headset\n\nA closed-back headset with a boom mic removes echo for everyone else.",
+      "createdAt": "2026-10-10T14:00:00.000Z",
+      "publishedAt": "2026-10-12T08:00:00.000Z"
+    },
+    {
+      "slug": "desk-cable-management",
+      "title": "Desk Cable Management in 30 Minutes",
+      "excerpt": "A tray, some clips and one hub: the fastest way to a clean desk.",
+      "body": "## Step 1: one hub\n\nMove everything to a single USB-C hub.\n\n## Step 2: under-desk tray\n\nHide the power strip and spare cable length in a tray.",
+      "createdAt": "2026-10-13T09:00:00.000Z",
+      "publishedAt": "2026-10-14T08:00:00.000Z"
+    }
+  ],
+
+  "articleProducts": [
+    { "article": "best-mechanical-keyboard-for-programmers", "product": "KB-0001" },
+    { "article": "best-mechanical-keyboard-for-programmers", "product": "KB-0002" },
+    { "article": "best-mechanical-keyboard-for-programmers", "product": "KB-0008" },
+    { "article": "ergonomic-desk-setup-guide", "product": "KB-0005" },
+    { "article": "ergonomic-desk-setup-guide", "product": "MS-0003" },
+    { "article": "ergonomic-desk-setup-guide", "product": "MN-0007" },
+    { "article": "choosing-a-monitor-for-coding", "product": "MN-0002" },
+    { "article": "choosing-a-monitor-for-coding", "product": "MN-0003" },
+    { "article": "choosing-a-monitor-for-coding", "product": "MN-0004" },
+    { "article": "usb-c-cables-explained", "product": "CB-0001" },
+    { "article": "usb-c-cables-explained", "product": "CB-0002" },
+    { "article": "usb-c-cables-explained", "product": "CB-0006" },
+    { "article": "home-office-audio-basics", "product": "AU-0001" },
+    { "article": "home-office-audio-basics", "product": "AU-0002" },
+    { "article": "home-office-audio-basics", "product": "AU-0008" },
+    { "article": "remote-meeting-kit", "product": "AU-0007" },
+    { "article": "remote-meeting-kit", "product": "AU-0003" },
+    { "article": "remote-meeting-kit", "product": "MN-0008" },
+    { "article": "desk-cable-management", "product": "CB-0007" },
+    { "article": "desk-cable-management", "product": "CB-0005" }
+  ]
+}

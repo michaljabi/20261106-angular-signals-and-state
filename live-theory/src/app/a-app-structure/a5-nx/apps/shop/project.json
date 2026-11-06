@@ -1,0 +1,6 @@
+{
+  "name": "shop",
+  "projectType": "application",
+  "sourceRoot": "apps/shop/src",
+  "tags": ["type:app"]
+}

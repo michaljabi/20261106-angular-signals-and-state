@@ -1,0 +1,6 @@
+{
+  "name": "cart-feature",
+  "projectType": "library",
+  "sourceRoot": "libs/cart/feature/src",
+  "tags": ["scope:cart", "type:feature"]
+}
