@@ -76,17 +76,21 @@ export class CartPage {
       //
       // this.someText = '!!';
       this.dropText.set('Drop something!');
-      this.elements.set([{ uuid: '1' }, {uuid: '2'}]);
+      this.elements.set([{ uuid: '1' }, { uuid: '2' }]);
 
       //this.cart.lines.set([]);
     }, 3000);
 
+    //https://angular.dev/guide/signals#reading-without-tracking-dependencies
+    effect(() => {
+      localStorage.setItem('drop-text', this.dropText());
+    });
+
     effect(() => {
       console.log('Nowy tekst', this.dropText());
-      localStorage.setItem('drop-text',  this.dropText());
-    })
+    });
 
-    if(localStorage.getItem('drop-text')) {
+    if (localStorage.getItem('drop-text')) {
       // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing
       this.dropText.set(localStorage.getItem('drop-text') ?? '');
     }
