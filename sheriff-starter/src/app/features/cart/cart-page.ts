@@ -1,11 +1,12 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { PricePipe } from '../../shared';
 import { CartStore } from './cart-store';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-cart-page',
-  imports: [RouterLink, PricePipe],
+  imports: [RouterLink, PricePipe, JsonPipe],
   template: `
     <h1 class="h3 mb-4">Cart</h1>
 
@@ -38,7 +39,22 @@ import { CartStore } from './cart-store';
       </button>
     }
 
-    <div class="alert alert-warning" tabindex="1" (click)="addExclamation()" (keydown.enter)="addExclamation()">{{ dropText() }}</div>
+    <div
+      class="alert alert-warning"
+      tabindex="1"
+      (click)="addExclamation()"
+      (keydown.enter)="addExclamation()"
+    >
+      {{ dropText() }}
+    </div>
+    <div
+      class="alert alert-success"
+      tabindex="2"
+      (click)="changeUser()"
+      (keydown.enter)="changeUser()"
+    >
+      {{ user() | json }}
+    </div>
   `,
   // changeDetection: ChangeDetectionStrategy.Eager,
 })
@@ -47,6 +63,7 @@ export class CartPage {
 
   protected readonly dropText = signal('Drop something in to this basket');
 
+  protected readonly user = signal({ name: 'Michał', age: 30 });
   // protected someText = '??';
 
   constructor() {
@@ -61,6 +78,13 @@ export class CartPage {
     this.dropText.set(this.dropText() + '!');
     // this.dropText.update((t) => t + '!');
   }
+
+  changeUser() {
+    // const u = this.user();
+    // u.name = 'Stanisław';
+    // this.user.set(u);
+    this.user.set({ ...this.user(), name: 'Stanisław' });
+  }
 }
 
 /*
@@ -73,6 +97,12 @@ export class CartPage {
    po kolejnym Drop something in to this basket!!
    po kolejnym Drop something in to this basket!!!
    etc....
+
+### 5. Signal with Objects
+
+5.1 Napisz sygnał przechowujący obiekt `{ name: 'Twoje imie' }`
+5.2 Wyświetl na widoku za pomocą JsonPipe
+5.3 Po kliknięciu (albo po czasie N) - zmień na teskt `{ name: 'Imie kolegi' }`
 
  */
 
