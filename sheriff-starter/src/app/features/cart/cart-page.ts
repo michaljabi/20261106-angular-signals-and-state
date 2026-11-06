@@ -38,7 +38,7 @@ import { CartStore } from './cart-store';
       </button>
     }
 
-    {{ dropText() }}
+    <div class="alert alert-warning" tabindex="1" (click)="addExclamation()" (keydown.enter)="addExclamation()">{{ dropText() }}</div>
   `,
   // changeDetection: ChangeDetectionStrategy.Eager,
 })
@@ -57,9 +57,22 @@ export class CartPage {
     }, 3000);
   }
 
-  saySomething() {
-    // this.dropText = signal('');
+  addExclamation() {
+    this.dropText.set(this.dropText() + '!');
+    // this.dropText.update((t) => t + '!');
   }
 }
 
+/*
+### 4. Zmiana wartości sygnału
+
+4.1 Po kliknięciu w ten tekst
+<div class="alert alert-warining">Drop something in to this basket</div>
+4.2 Za każdym kliknięciem dopisuj `!` na koniec tekstu
+4.3 Po kliku na UI będzie: Drop something in to this basket!
+   po kolejnym Drop something in to this basket!!
+   po kolejnym Drop something in to this basket!!!
+   etc....
+
+ */
 
