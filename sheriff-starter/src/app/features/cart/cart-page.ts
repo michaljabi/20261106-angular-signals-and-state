@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal, untracked } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { PricePipe } from '../../shared';
 import { CartStore } from './cart-store';
@@ -81,13 +81,13 @@ export class CartPage {
       //this.cart.lines.set([]);
     }, 3000);
 
-    //https://angular.dev/guide/signals#reading-without-tracking-dependencies
     effect(() => {
       localStorage.setItem('drop-text', this.dropText());
     });
 
     effect(() => {
-      console.log('Nowy tekst', this.dropText());
+      //https://angular.dev/guide/signals#reading-without-tracking-dependencies
+      console.log('Nowy tekst', untracked(this.dropText));
     });
 
     if (localStorage.getItem('drop-text')) {
