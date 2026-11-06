@@ -77,6 +77,8 @@ export class CartPage {
       // this.someText = '!!';
       this.dropText.set('Drop something!');
       this.elements.set([{ uuid: '1' }, {uuid: '2'}]);
+
+      //this.cart.lines.set([]);
     }, 3000);
   }
 

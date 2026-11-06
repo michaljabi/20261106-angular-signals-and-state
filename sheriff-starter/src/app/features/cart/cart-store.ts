@@ -26,7 +26,7 @@ export class CartStore {
     6.1 Przelicz sumę koszyka na podstawie wszystkich jego elementów
     6.2 Suma powinna aktualizować się na podstawie wszystkich elementów koszyka
   */
-  readonly totalCents = computed(() => 0);
+  readonly totalCents = computed(() => this._lines().reduce((sum, l) => sum + l.priceCents * l.quantity, 0));
 
   add(item: CartItem): void {
     this._lines.update((lines) =>
@@ -42,5 +42,6 @@ export class CartStore {
 
   clear(): void {
     // Zadanie 5: napraw, czyszczenie zawartości koszyka
+    this._lines.set([]);
   }
 }
