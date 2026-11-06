@@ -20,7 +20,13 @@ export class CartStore {
   readonly count = computed(() => this._lines().reduce((sum, l) => sum + l.quantity, 0));
 
   // Zadanie 6: napraw niedziałający licznik sumy koszyka:
-  readonly totalCents = signal(0);
+  /*
+  ### 6. Napraw totalCents
+
+    6.1 Przelicz sumę koszyka na podstawie wszystkich jego elementów
+    6.2 Suma powinna aktualizować się na podstawie wszystkich elementów koszyka
+  */
+  readonly totalCents = computed(() => 0);
 
   add(item: CartItem): void {
     this._lines.update((lines) =>

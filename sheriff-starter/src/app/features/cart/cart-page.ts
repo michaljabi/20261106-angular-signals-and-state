@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { PricePipe } from '../../shared';
 import { CartStore } from './cart-store';
@@ -55,6 +55,8 @@ import { JsonPipe } from '@angular/common';
     >
       {{ user() | json }}
     </div>
+
+    <div>Zawartość: {{ elementsCount() }}</div>
   `,
   // changeDetection: ChangeDetectionStrategy.Eager,
 })
@@ -66,11 +68,15 @@ export class CartPage {
   protected readonly user = signal({ name: 'Michał', age: 30 });
   // protected someText = '??';
 
+  protected readonly elements = signal<{ uuid: string }[]>([]);
+  protected readonly elementsCount = computed(() => this.elements().length);
+
   constructor() {
     setTimeout(() => {
       //
       // this.someText = '!!';
       this.dropText.set('Drop something!');
+      this.elements.set([{ uuid: '1' }, {uuid: '2'}]);
     }, 3000);
   }
 
