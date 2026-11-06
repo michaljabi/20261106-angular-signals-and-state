@@ -218,6 +218,12 @@ importers:
       '@eslint/js':
         specifier: ^10.0.1
         version: 10.0.1(eslint@10.14.0(supports-color@8.1.1))
+      '@softarc/eslint-plugin-sheriff':
+        specifier: ^0.20.0
+        version: 0.20.0(@softarc/sheriff-core@0.20.0(typescript@6.0.3))(@typescript-eslint/utils@8.72.1(eslint@10.14.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(eslint@10.14.0(supports-color@8.1.1))
+      '@softarc/sheriff-core':
+        specifier: ^0.20.0
+        version: 0.20.0(typescript@6.0.3)
       '@types/express':
         specifier: ^5.0.1
         version: 5.0.6
@@ -1503,6 +1509,19 @@ packages:
   '@schematics/angular@22.2.5':
     resolution: {integrity: sha512-wP4pzkm1lwrC1UxaGqq6/4sEAHeBNsg/vyyKy4y94C6B0YzDQbMnvPBFvVsv1sD7ORhiQe5n2DBr8gzgr6mAYg==}
     engines: {node: ^22.22.3 || ^24.15.0 || >=26.0.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
+
+  '@softarc/eslint-plugin-sheriff@0.20.0':
+    resolution: {integrity: sha512-l0PiMLANwigPtTTPuOQUzQFbgXrmnhZhFWpTCmOfwO9aADorZoY9NdU0FJkq5G5O9Dg+Xnu0oIkMHrxFwQYDog==}
+    peerDependencies:
+      '@softarc/sheriff-core': 0.20.0
+      '@typescript-eslint/utils': ^5.48.2 || ^6.0.0 || ^7.0.0 || ^8.0.0-alpha.20
+      eslint: ^8.0.0 || ^9.0.0 || ^10.0.0
+
+  '@softarc/sheriff-core@0.20.0':
+    resolution: {integrity: sha512-dTm5dOUMOGTV3ql7ZIuI8rE+gZawIcJLEluqRYX3KDVJ215vfUzpC9LlSL4pTW0lAAeNLelmPZBzY57jLvOPpg==}
+    hasBin: true
+    peerDependencies:
+      typescript: '>=4.8'
 
   '@standard-schema/spec@1.1.0':
     resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
@@ -4170,6 +4189,16 @@ snapshots:
       typescript: 6.0.3
     transitivePeerDependencies:
       - chokidar
+
+  '@softarc/eslint-plugin-sheriff@0.20.0(@softarc/sheriff-core@0.20.0(typescript@6.0.3))(@typescript-eslint/utils@8.72.1(eslint@10.14.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(eslint@10.14.0(supports-color@8.1.1))':
+    dependencies:
+      '@softarc/sheriff-core': 0.20.0(typescript@6.0.3)
+      '@typescript-eslint/utils': 8.72.1(eslint@10.14.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)
+      eslint: 10.14.0(supports-color@8.1.1)
+
+  '@softarc/sheriff-core@0.20.0(typescript@6.0.3)':
+    dependencies:
+      typescript: 6.0.3
 
   '@standard-schema/spec@1.1.0': {}
 

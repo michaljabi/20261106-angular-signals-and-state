@@ -4,6 +4,8 @@ const { defineConfig } = require('eslint/config');
 const tseslint = require('typescript-eslint');
 const angular = require('angular-eslint');
 
+const sheriff = require('@softarc/eslint-plugin-sheriff');
+
 module.exports = defineConfig([
   {
     files: ['**/*.ts'],
@@ -32,6 +34,10 @@ module.exports = defineConfig([
         },
       ],
     },
+  },
+  {
+    files: ['**/*.ts'],
+    extends: [sheriff.configs.all],
   },
   {
     files: ['**/*.html'],

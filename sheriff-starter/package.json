@@ -8,7 +8,9 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:sheriff-starter": "node dist/sheriff-starter/server/server.mjs",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "sh:list": "sheriff list",
+    "sh:verify": "sheriff verify"
   },
   "private": true,
   "packageManager": "pnpm@12.8.1",
@@ -32,6 +34,8 @@
     "@angular/cli": "^22.2.5",
     "@angular/compiler-cli": "^22.2.0",
     "@eslint/js": "^10.0.1",
+    "@softarc/eslint-plugin-sheriff": "^0.20.0",
+    "@softarc/sheriff-core": "^0.20.0",
     "@types/express": "^5.0.1",
     "@types/node": "^22.12.0",
     "angular-eslint": "22.6.0",
