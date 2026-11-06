@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { PricePipe } from '../../shared';
 import { CartStore } from './cart-store';
@@ -40,11 +40,22 @@ import { CartStore } from './cart-store';
 
     {{ dropText() }}
   `,
+  // changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class CartPage {
   protected readonly cart = inject(CartStore);
 
   protected readonly dropText = signal('Drop something in to this basket');
+
+  // protected someText = '??';
+
+  constructor() {
+    setTimeout(() => {
+      //
+      // this.someText = '!!';
+      this.dropText.set('Drop something!');
+    }, 3000);
+  }
 
   saySomething() {
     // this.dropText = signal('');
