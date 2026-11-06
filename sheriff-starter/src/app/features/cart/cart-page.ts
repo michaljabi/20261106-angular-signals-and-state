@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { PricePipe } from '../../shared';
 import { CartStore } from './cart-store';
@@ -37,8 +37,18 @@ import { CartStore } from './cart-store';
         Clear cart
       </button>
     }
+
+    {{ dropText() }}
   `,
 })
 export class CartPage {
   protected readonly cart = inject(CartStore);
+
+  protected readonly dropText = signal('Drop something in to this basket');
+
+  saySomething() {
+    // this.dropText = signal('');
+  }
 }
+
+
