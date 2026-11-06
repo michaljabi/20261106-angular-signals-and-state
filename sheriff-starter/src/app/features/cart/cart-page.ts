@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { PricePipe } from '../../shared';
 import { CartStore } from './cart-store';
@@ -80,6 +80,16 @@ export class CartPage {
 
       //this.cart.lines.set([]);
     }, 3000);
+
+    effect(() => {
+      console.log('Nowy tekst', this.dropText());
+      localStorage.setItem('drop-text',  this.dropText());
+    })
+
+    if(localStorage.getItem('drop-text')) {
+      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing
+      this.dropText.set(localStorage.getItem('drop-text') ?? '');
+    }
   }
 
   addExclamation() {
