@@ -6,7 +6,8 @@ import { ServerEvents } from '../../../shared/data-access';
 import { PageHeader, Pager, PricePipe, ProblemAlert } from '../../../shared/ui';
 import { ProblemDetails, toProblem } from '../../../shared/util';
 import { OrdersApi } from '../data-access';
-import { FilterOption, FilterPills, OrderStatusBadge } from '../ui';
+import { FilterPills, FilterOption, OrderStatusBadge } from '../ui';
+// import {  } from '../ui/filter-pills';
 import { Order, OrderStatus } from '../util';
 
 const PAGE_SIZE = 10;

@@ -41,7 +41,7 @@ export class AddToCartButton {
   readonly canBuy = input(false);
   /** Where to come back after login. */
   readonly returnUrl = input('/');
-  readonly add = output();
+  readonly add /*: OutputEmitterRef<string>*/ = output();
 
   /** You cannot put more in the cart than is on the shelf. */
   protected readonly soldOut = computed(() => this.inCart() >= this.stock());

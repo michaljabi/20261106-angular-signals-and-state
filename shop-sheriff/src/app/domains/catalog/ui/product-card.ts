@@ -1,8 +1,8 @@
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Session } from '../../../shared/data-access';
+// import { Session } from '../../../shared/data-access';
 import { PricePipe } from '../../../shared/ui';
-import { CartStore } from '../../checkout/data-access';
+// import { CartStore } from '../../checkout/data-access';
 import { Product } from '../util';
 import { AddToCartButton } from './add-to-cart-button';
 import { StockBadge } from './stock-badge';
@@ -46,20 +46,36 @@ import { StockBadge } from './stock-badge';
   `,
 })
 export class ProductCard {
+  // DUMMY COMPONENT -> Zadanie #1 -> zrefaktoryzowany komponen prezentacyjny
+
+  // @Input() => data z zewnątrz
+  // @Output() => wysyłam do góry -> nie wiem kto odbiera
+
   // https://angular.dev/guide/di#injecting-dependencies-with-inject
-  private readonly cart = inject(CartStore);
-  private readonly session = inject(Session);
+  //private readonly cart = inject(CartStore);
+  //private readonly session = inject(Session);
+
+  // Old one
+  // constructor(private readonly cart: CartStore, private readonly session: Session) {
+  // }
 
   // https://angular.dev/guide/components/inputs
   readonly product = input.required<Product>();
 
+  // @Input() inCart: number = 0;
+  readonly inCart = input<number>(0);
+  readonly canBuy = input<boolean>(false);
+  addItemToCart = output<Product>()
+
   // Zadanie: dostęp do session i cart tutaj?
   // trzeba to naprawić, zrefaktoryzuj
   /** How many of this product are already in the cart. */
-  protected readonly inCart = computed(() => this.cart.quantityOf(this.product().id));
-  protected readonly canBuy = computed(() => this.session.hasRole('buyer'));
+  //protected readonly inCart = computed(() => this.cart.quantityOf(this.product().id));
+  //protected readonly canBuy = computed(() => this.session.hasRole('buyer'));
 
   protected add(): void {
-    this.cart.add(this.product());
+    //this.cart.add(this.product());
+    // this.coś.emit(
+    this.addItemToCart.emit(this.product());
   }
 }

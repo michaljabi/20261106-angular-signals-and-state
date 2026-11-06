@@ -1,11 +1,13 @@
-import { Component, computed, linkedSignal, signal } from '@angular/core';
+import { Component, computed, inject, linkedSignal, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Subject, debounceTime, distinctUntilChanged, map } from 'rxjs';
 import { PageHeader, Pager, ProblemAlert } from '../../../shared/ui';
 import { toProblem } from '../../../shared/util';
 import { categoriesResource, pageWithStock, productsResource, syncLiveStock } from '../data-access';
 import { CategoryFilter, ProductCard } from '../ui';
-import { PRODUCT_SORTS, ProductSort, SORT_LABELS, isProductSort } from '../util';
+import { PRODUCT_SORTS, ProductSort, SORT_LABELS, isProductSort, Product } from '../util';
+import { Session } from '../../../shared/data-access';
+import { CartStore } from '../../checkout/data-access';
 
 const PAGE_SIZE = 12;
 
@@ -14,11 +16,18 @@ const PAGE_SIZE = 12;
   selector: 'app-browse-page',
   imports: [PageHeader, Pager, ProblemAlert, CategoryFilter, ProductCard],
   templateUrl: './browse-page.html',
+  providers: [],
 })
 export class BrowsePage {
   protected readonly pageSize = PAGE_SIZE;
   protected readonly sorts = PRODUCT_SORTS;
   protected readonly sortLabels = SORT_LABELS;
+
+  private readonly session = inject(Session);
+  private readonly cartStore = inject(CartStore);
+
+  // protected readonly inCart = computed(() => this.cartStore.quantityOf(this.product().id));
+  protected readonly canBuy = computed(() => this.session.hasRole('buyer'));
 
   // Search: keystrokes are EVENTS over TIME → RxJS (debounce); the result is STATE → signal.
   private readonly searchInput$ = new Subject<string>();
@@ -70,4 +79,13 @@ export class BrowsePage {
   protected onSort(value: string): void {
     if (isProductSort(value)) this.sort.set(value);
   }
+
+  addItemToCart(product: Product): void {
+    this.cartStore.add(product);
+  }
+
+  countItemQuantity(product: Product): number {
+    return this.cartStore.quantityOf(product.id);
+  }
+
 }

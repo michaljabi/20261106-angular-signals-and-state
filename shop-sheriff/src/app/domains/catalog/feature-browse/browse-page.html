@@ -47,7 +47,12 @@
     <div class="row g-3 mb-4">
       @for (product of result.items; track product.id) {
         <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
-          <app-product-card [product]="product" />
+          <app-product-card
+            [product]="product"
+            [inCart]="countItemQuantity(product)"
+            [canBuy]="canBuy()"
+            (addItemToCart)="addItemToCart(product)"
+          />
         </div>
       }
     </div>
