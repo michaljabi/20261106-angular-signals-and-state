@@ -1,90 +1,11 @@
-import { Component, Injectable, inject, signal, input, output, computed } from '@angular/core';
-import { FormField, FormRoot, form, required, minLength } from '@angular/forms/signals';
+import { Component, inject, signal } from '@angular/core';
+import { FormField, FormRoot, form, required, minLength, validateHttp} from '@angular/forms/signals';
 import { PageHeader } from '../../../shared/ui';
 import { WishlistItem } from './wishlist-item';
+import { WishlistToggle } from '../ui';
+import { WishlistStore, wishlistProductRequest } from '../data-access';
+import { WishlistDetails, WishlistProduct } from '../util';
 
-// data-access ────────────────────────────────────────────────────────────────
-
-@Injectable({ providedIn: 'root' })
-export class WishlistStore {
-  private _slugs  = signal<string[]>([]);
-
-  slugs = this._slugs.asReadonly();
-  count = computed(() => this._slugs().length)
-
-  toggleOnList(slug: string) {
-    this._slugs.update((sl) => this.has(slug) ? sl.filter((s) => s !== slug) : [...sl, slug]);
-  }
-
-  has(lookFor: string): boolean {
-    return this._slugs().includes(lookFor)
-  }
-}
-
-/*
-@Injectable({ providedIn: 'root' })
-export class WishlistStore {
-  private _slugs: string[] = [
-    'typeforge-tkl-mechanical-keyboard',
-    'typeforge-75-wireless-keyboard',
-  ];
-
-  get slugs(): readonly string[] {
-    return this._slugs;
-  }
-
-  get count(): number {
-    return this._slugs.length;
-  }
-
-  toggleOnList(slug: string) {
-    if(this.has(slug)) {
-      this._slugs = this._slugs.filter((s) => s !== slug);
-    } else {
-      this._slugs.push(slug);
-    }
-  }
-
-  has(lookFor: string): boolean {
-    return this._slugs.includes(lookFor)
-  }
-}
-* */
-
-// const myStore = new WishlistStore();
-//
-// myStore.slugs.push()
-
-// component (/ui) ────────────────────────────────────────────────────────────────
-
-@Component({
-  selector: 'app-wishlist-toggle',
-  template: `
-    <button
-      type="button"
-      class="btn btn-sm"
-      [class.btn-danger]="active()"
-      [class.btn-outline-danger]="!active()"
-      [attr.aria-pressed]="active()"
-      [attr.aria-label]="active() ? 'Remove from wishlist' : 'Add to wishlist'"
-      (click)="addToList.emit()"
-    >
-      {{ active() ? '♥' : '♡' }}
-    </button>
-  `,
-})
-export class WishlistToggle {
-  // @Input()
-  readonly active = input(false);
-  // @Output()
-  readonly addToList = output<void>();
-
-  // RUNTIME Exception - widoczny będzie w konsoli przeglądarki (f12) narzędzia DevTools
-  // throwError() {
-  //   throw new Error('!');
-  // }
-}
-// ─────────────────────────────────────────────────────────────────
 
 /** Real slugs from shop-api. */
 const DEMO_SLUGS = [
@@ -93,14 +14,9 @@ const DEMO_SLUGS = [
   'typeforge-low-profile-keyboard',
   'typeforge-ergonomic-split-keyboard',
   'typeforge-60-compact-keyboard',
+  'sampler'
 ];
 
-interface WishlistDetails {
-  name: string;
-  description: string;
-
-  giftSlug: string;
-}
 
 @Component({
   selector: 'app-wishlist-page',
@@ -121,7 +37,7 @@ interface WishlistDetails {
     </ul>
 
     <hr />
-    <h2 class="h5 mt-4">List details</h2>
+    <h2 class="h5 mt-4">List details </h2>
 
     <!-- formRoot: dodaje novalidate, on submit zaznacza pola jako touched, uruchamia submission.action tylko jeśli pola valid! -->
     <form [formRoot]="detailsForm" class="vstack gap-3" style="max-width: 32rem">
@@ -160,10 +76,45 @@ interface WishlistDetails {
         }
       </div>
 
+      <!-- SLUG (gift) -->
+      <div>
+        @let giftSlug = detailsForm.giftSlug();
+        <label class="form-label" for="wishlist-gift">Gift idea (product slug, optional)</label>
+        <div class="input-group has-validation">
+          <input
+            id="wishlist-gift"
+            class="form-control font-monospace"
+            placeholder="e.g. typeforge-75-wireless-keyboard"
+            autocomplete="off"
+            [class.is-invalid]="giftSlug.touched() && giftSlug.invalid()"
+            [class.is-valid]="giftSlug.touched() && giftSlug.valid()"
+            [formField]="detailsForm.giftSlug"
+          />
+          @if (detailsForm().pending()) {
+            <span class="input-group-text">
+              <span class="spinner-border spinner-border-sm" aria-label="Checking…"></span>
+            </span>
+          }
+        </div>
+        <!-- błędy: jak przy name, ale z d-block (pole jest w input-group) -->
+
+        @if (giftSlug.touched()) {
+          @for (error of giftSlug.errors(); track error.kind) {
+            <div class="invalid-feedback d-block">{{ error.message }}</div>
+          }
+        }
+      </div>
+
       <div class="d-flex gap-2">
-        <button type="submit" [style.opacity]="detailsForm().invalid() ? 0.5 : 1" class="btn btn-primary">
+        <button
+          type="submit"
+          [style.opacity]="detailsForm().invalid() ? 0.5 : 1"
+          class="btn btn-primary"
+        >
           Save
         </button>
+
+        <button type="button" class="btn btn-outline-secondary" (click)="resetForm()">Reset</button>
       </div>
       <!--<pre>
         {{ detailsModel() | json }}
@@ -203,14 +154,27 @@ export class WishlistPage {
     (p) => {
       required(p.name, { message: 'Name is required' });
       minLength(p.description, 5, { message: 'Description must be at least 5 characters' });
+
+      validateHttp<string, WishlistProduct>(p.giftSlug, {
+        request: ({ value }) => wishlistProductRequest(value()),
+        debounce: 400,
+        onSuccess: (res) =>
+          res.id ? null : { kind: 'not-exist', message: 'Product does not exist' },
+        onError: () => ({ kind: 'server', message: 'Product does not exist' }),
+      });
     },
     {
       submission: {
         action: async () => {
           console.log(this.detailsModel());
-          // this.wishlist.saveDetails(this.detailsModel());
+          this.wishlist.saveDetails(this.detailsModel());
         },
       },
     },
   );
+
+  resetForm(): void {
+    this.detailsModel.set({ name: '', giftSlug: '', description: '' });
+    this.detailsForm().reset();
+  }
 }

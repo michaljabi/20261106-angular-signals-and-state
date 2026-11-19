@@ -1,17 +1,9 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { httpResource } from '@angular/common/http';
 import { PricePipe } from '../../../shared/ui';
 
-interface WishlistProduct {
-  id: string;
-  sku: string;
-  name: string;
-  description: string;
-  slug: string;
-  priceCents: number;
-  stock: number;
-}
+import { ProblemDetails, toProblem } from '../../../shared/util';
+import { WishlistStore, wishlistProductResource } from '../data-access';
 
 @Component({
   imports: [RouterLink, PricePipe],
@@ -24,18 +16,26 @@ interface WishlistProduct {
       <!-- ładowanie -->
       <span class="text-body-secondary">Loading…</span>
     } @else if (product.error()) {
-      <span class="text-danger">Could not load wishlist product :( </span>
+      <span class="text-danger"
+        >Could not load wishlist product :( {{ problemDetail().status }}
+      </span>
       <button type="button" class="btn btn-sm btn-outline-secondary" (click)="product.reload()">
         Try again
       </button>
     } @else if (product.hasValue()) {
       <a [routerLink]="['/products', slug()]">{{ product.value().name }}</a>
       {{ product.value().priceCents | price }}
+      <button type="button" class="btn btn-sm btn-outline-danger" (click)="wishlistStore.toggleOnList(slug())">Remove</button>
     }
   </li>`,
 })
 export class WishlistItem {
   slug = input.required<string>();
 
-  product = httpResource<WishlistProduct>(() => '/api/products/' + this.slug());
+  product = wishlistProductResource(this.slug);
+
+  wishlistStore = inject(WishlistStore);
+
+  // 2. poprawna obsługa błędu
+  problemDetail = computed<ProblemDetails>(() => toProblem(this.product.error()));
 }
