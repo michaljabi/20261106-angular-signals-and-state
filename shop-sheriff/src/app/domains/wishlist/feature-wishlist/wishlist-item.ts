@@ -1,7 +1,8 @@
 import { Component, computed, inject, input } from '@angular/core';
-import { outputFromObservable, toSignal } from '@angular/core/rxjs-interop';
+import { outputFromObservable, toSignal, toObservable } from '@angular/core/rxjs-interop';
+// toObservable -> z sygnału RxJS robimy.
 import { RouterLink } from '@angular/router';
-import { distinctUntilChanged, filter, map } from 'rxjs';
+import { distinctUntilChanged, filter, map, Observable } from 'rxjs';
 import { ServerEvents } from '../../../shared/data-access';
 import { PricePipe } from '../../../shared/ui';
 
@@ -57,7 +58,7 @@ export class WishlistItem {
   problemDetail = computed<ProblemDetails>(() => toProblem(this.product.error()));
 
   // 8. RxJS: stream of SSE events (all products) → only this product → "is in stock?"
-  private readonly inStock$ = inject(ServerEvents)
+  private readonly inStock$: Observable<boolean> = inject(ServerEvents)
     .on('stock.changed')
     .pipe(
       // Event has `productId`, not slug → compare with `id` of loaded product.
@@ -74,6 +75,8 @@ export class WishlistItem {
 
   // Interop: toSignal = Observable → Signal (subscribes now, unsubscribes on destroy).
   backInStock = toSignal(this.inStock$, { initialValue: false });
+
+  // toObservable()
 
   // Interop: outputFromObservable = Observable → output (parent listens, no manual subscribe).
   //          Emits product name when it comes back in stock.
