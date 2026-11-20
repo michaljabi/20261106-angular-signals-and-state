@@ -121,13 +121,28 @@ const DEMO_SLUGS = [
       </pre>-->
     </form>
 
+    @if (backInStockName(); as name) {
+      <div
+        class="alert alert-info d-flex justify-content-between align-items-center mt-4"
+        role="status"
+      >
+        <span>♥ <strong>{{ name }}</strong> is back in stock</span>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          (click)="backInStockName.set(null)"
+        ></button>
+      </div>
+    }
+
     <h2 class="h5 mt-4 d-flex justify-content-between">
       Liked<span class="badge text-bg-danger">{{ wishlist.count() }}</span>
     </h2>
     @if (wishlist.count()) {
       <ul class="list-group">
         @for (slug of wishlist.slugs(); track slug) {
-          <app-wishlist-item [slug]="slug" />
+          <app-wishlist-item [slug]="slug" (cameBackInStock)="backInStockName.set($event)" />
         }
       </ul>
     } @else {
@@ -138,6 +153,8 @@ const DEMO_SLUGS = [
 export class WishlistPage {
   protected readonly wishlist = inject(WishlistStore);
   protected readonly demoSlugs = DEMO_SLUGS;
+  /** 8. Last "back in stock" message (local UI state of this page). */
+  protected readonly backInStockName = signal<string | null>(null);
 
   // Signal Forms docs: https://angular.dev/guide/forms/signals/overview
   //   model:      https://angular.dev/guide/forms/signals/models
