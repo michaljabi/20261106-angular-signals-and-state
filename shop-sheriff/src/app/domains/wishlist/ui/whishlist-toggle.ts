@@ -10,7 +10,7 @@ import { Component, input, output } from '@angular/core';
       [class.btn-outline-danger]="!active()"
       [attr.aria-pressed]="active()"
       [attr.aria-label]="active() ? 'Remove from wishlist' : 'Add to wishlist'"
-      (click)="addToList.emit()"
+      (click)="toggled.emit()"
     >
       {{ active() ? '♥' : '♡' }}
     </button>
@@ -20,7 +20,7 @@ export class WishlistToggle {
   // @Input()
   readonly active = input(false);
   // @Output()
-  readonly addToList = output<void>();
+  readonly toggled = output<void>();
 
   // RUNTIME Exception - widoczny będzie w konsoli przeglądarki (f12) narzędzia DevTools
   // throwError() {

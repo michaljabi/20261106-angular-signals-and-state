@@ -16,7 +16,10 @@
         <a class="nav-link" routerLink="/articles" routerLinkActive="active">Articles</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/wishlist" routerLinkActive="active">Wishlist</a>
+        <a class="nav-link" routerLink="/wishlist" routerLinkActive="active">
+          Wishlist
+          <span class="badge text-bg-danger">{{wishlistStore.count()}}</span>
+        </a>
       </li>
 
       @if (session.hasRole('buyer')) {

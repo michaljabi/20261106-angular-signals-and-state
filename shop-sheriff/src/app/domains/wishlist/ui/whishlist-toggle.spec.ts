@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { WhishlistToggle } from './whishlist-toggle';
+import { WishlistToggle } from './whishlist-toggle';
 
-describe('WhishlistToggle', () => {
-  let component: WhishlistToggle;
-  let fixture: ComponentFixture<WhishlistToggle>;
+describe('WishlistToggle', () => {
+  let component: WishlistToggle;
+  let fixture: ComponentFixture<WishlistToggle>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [WhishlistToggle],
+      imports: [WishlistToggle],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(WhishlistToggle);
+    fixture = TestBed.createComponent(WishlistToggle);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

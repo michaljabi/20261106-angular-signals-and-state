@@ -31,7 +31,7 @@ export const config: SheriffConfig = {
     root: ['type:feature', 'type:data-access', 'domain:shared'],
 
     'domain:*': [sameTag, 'domain:shared'], // Reguły domen: domena używa siebie samej i shared...
-    'domain:catalog': ['domain:checkout'], // ...z jednym świadomym wyjątkiem: catalog może użyć koszyka.
+    'domain:catalog': ['domain:checkout', 'domain:wishlist'], // ...z jednym świadomym wyjątkiem: catalog może użyć koszyka.
 
     // Reguły typów (warstwy). Zależności idą tylko "w dół": feature → ui/data-access → util.
     // Feature składa stronę: komponenty ui + dane z data-access + util. Feature nie importuje innego feature'a.

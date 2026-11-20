@@ -12,7 +12,7 @@ import { RouterLink } from '@angular/router';
     @if (canBuy()) {
       <button
         type="button"
-        class="btn btn-outline-primary w-100"
+        class="btn btn-outline-primary  flex-grow-1"
         [disabled]="soldOut()"
         (click)="add.emit()"
       >
@@ -27,7 +27,7 @@ import { RouterLink } from '@angular/router';
       </button>
     } @else {
       <a
-        class="btn btn-outline-secondary w-100"
+        class="btn btn-outline-secondary  flex-grow-1"
         routerLink="/login"
         [queryParams]="{ returnUrl: returnUrl() }"
         >Log in to buy</a

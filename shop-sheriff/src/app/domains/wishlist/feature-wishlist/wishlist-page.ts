@@ -30,14 +30,14 @@ const DEMO_SLUGS = [
           {{ slug }}
           <app-wishlist-toggle
             [active]="wishlist.has(slug)"
-            (addToList)="wishlist.toggleOnList(slug)"
+            (toggled)="wishlist.toggleOnList(slug)"
           />
         </li>
       }
     </ul>
 
     <hr />
-    <h2 class="h5 mt-4">List details </h2>
+    <h2 class="h5 mt-4">List details</h2>
 
     <!-- formRoot: dodaje novalidate, on submit zaznacza pola jako touched, uruchamia submission.action tylko jeśli pola valid! -->
     <form [formRoot]="detailsForm" class="vstack gap-3" style="max-width: 32rem">
@@ -144,9 +144,7 @@ export class WishlistPage {
   //   validation: https://angular.dev/guide/forms/signals/validation  (async: …/async-operations)
   //   submit:     https://angular.dev/guide/forms/signals/form-submission
   private readonly detailsModel = signal<WishlistDetails>({
-    name: '',
-    description: '',
-    giftSlug: '',
+    ...this.wishlist.details(),
   });
 
   protected readonly detailsForm = form(

@@ -52,7 +52,9 @@
             [inCart]="countItemQuantity(product)"
             [canBuy]="canBuy()"
             (addItemToCart)="addItemToCart(product)"
-          />
+          >
+            <app-wishlist-toggle (toggled)="wishlistStore.toggleOnList(product.slug)" [active]="wishlistStore.has(product.slug)"/>
+          </app-product-card>
         </div>
       }
     </div>

@@ -7,6 +7,7 @@ import { Product } from '../util';
 import { AddToCartButton } from './add-to-cart-button';
 import { StockBadge } from './stock-badge';
 
+
 /**
  * Product tile with a working "Add to cart" button.
  * The card talks to the cart itself, so any page can drop it in with just [product].
@@ -35,13 +36,14 @@ import { StockBadge } from './stock-badge';
         <app-stock-badge [stock]="product().stock" />
       </div>
     </div>
-    <div class="card-footer bg-transparent border-0 pb-3">
+    <div class="card-footer bg-transparent border-0 pb-3 d-flex justify-content-between align-items-center">
       <app-add-to-cart-button
         [stock]="product().stock"
         [inCart]="inCart()"
         [canBuy]="canBuy()"
         (add)="add()"
       />
+      <ng-content />
     </div>
   `,
 })
@@ -65,7 +67,7 @@ export class ProductCard {
   // @Input() inCart: number = 0;
   readonly inCart = input<number>(0);
   readonly canBuy = input<boolean>(false);
-  addItemToCart = output<Product>()
+  addItemToCart = output<Product>();
 
   // Zadanie: dostęp do session i cart tutaj?
   // trzeba to naprawić, zrefaktoryzuj

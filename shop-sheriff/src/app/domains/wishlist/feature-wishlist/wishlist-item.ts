@@ -11,21 +11,31 @@ import { WishlistStore, wishlistProductResource } from '../data-access';
   styles: ``,
   // standalone: true,
   // changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `<li class="list-group-item d-flex justify-content-between">
+  template: `<li class="list-group-item d-flex justify-content-between align-items-center  gap-3">
     @if (product.isLoading()) {
       <!-- ładowanie -->
       <span class="text-body-secondary">Loading…</span>
     } @else if (product.error()) {
-      <span class="text-danger"
-        >Could not load wishlist product :( {{ problemDetail().status }}
+      <span class="text-danger">
+        Could not load wishlist product :( {{ problemDetail().status }}
       </span>
       <button type="button" class="btn btn-sm btn-outline-secondary" (click)="product.reload()">
         Try again
       </button>
     } @else if (product.hasValue()) {
       <a [routerLink]="['/products', slug()]">{{ product.value().name }}</a>
-      {{ product.value().priceCents | price }}
-      <button type="button" class="btn btn-sm btn-outline-danger" (click)="wishlistStore.toggleOnList(slug())">Remove</button>
+      @if (product.value().stock === 0) {
+        <span class="ms-auto badge text-bg-secondary">Sold out</span>
+      } @else {
+        <span class="ms-auto"> {{ product.value().priceCents | price }}</span>
+      }
+      <button
+        type="button"
+        class="btn btn-sm btn-outline-danger"
+        (click)="wishlistStore.toggleOnList(slug())"
+      >
+        Remove
+      </button>
     }
   </li>`,
 })

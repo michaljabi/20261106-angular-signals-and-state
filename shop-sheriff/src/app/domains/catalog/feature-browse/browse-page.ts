@@ -8,13 +8,16 @@ import { CategoryFilter, ProductCard } from '../ui';
 import { PRODUCT_SORTS, ProductSort, SORT_LABELS, isProductSort, Product } from '../util';
 import { Session } from '../../../shared/data-access';
 import { CartStore } from '../../checkout/data-access';
+import { WishlistToggle } from '../../wishlist/ui';
+import { WishlistStore } from '../../wishlist/data-access';
+
 
 const PAGE_SIZE = 12;
 
 /** Smart component: owns the filter state and reads server state. */
 @Component({
   selector: 'app-browse-page',
-  imports: [PageHeader, Pager, ProblemAlert, CategoryFilter, ProductCard],
+  imports: [PageHeader, Pager, ProblemAlert, CategoryFilter, ProductCard, WishlistToggle],
   templateUrl: './browse-page.html',
   providers: [],
 })
@@ -25,6 +28,7 @@ export class BrowsePage {
 
   private readonly session = inject(Session);
   private readonly cartStore = inject(CartStore);
+  protected readonly wishlistStore = inject(WishlistStore);
 
   // protected readonly inCart = computed(() => this.cartStore.quantityOf(this.product().id));
   protected readonly canBuy = computed(() => this.session.hasRole('buyer'));
@@ -87,5 +91,4 @@ export class BrowsePage {
   countItemQuantity(product: Product): number {
     return this.cartStore.quantityOf(product.id);
   }
-
 }

@@ -2,6 +2,7 @@ import { Component, afterNextRender, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { CartStore } from './domains/checkout/data-access';
 import { Session } from './shared/data-access';
+import { WishlistStore } from './domains/wishlist/data-access';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,7 @@ import { Session } from './shared/data-access';
 export class App {
   protected readonly session = inject(Session);
   protected readonly cart = inject(CartStore);
+  protected readonly wishlistStore = inject(WishlistStore);
   private readonly router = inject(Router);
 
   constructor() {
